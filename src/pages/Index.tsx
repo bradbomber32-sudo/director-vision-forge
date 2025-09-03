@@ -1,12 +1,48 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { ClapperBar } from "@/components/director-forge/clapper-bar";
+import { LeftToolbar } from "@/components/director-forge/left-toolbar";
+import { RightToolbar } from "@/components/director-forge/right-toolbar";
+import { NodeGraph } from "@/components/director-forge/node-graph";
+import { Timeline } from "@/components/director-forge/timeline";
 
 const Index = () => {
+  const [currentMode, setCurrentMode] = useState('video');
+  const [isZenMode, setIsZenMode] = useState(false);
+
+  const handleModeChange = (mode: string) => {
+    setCurrentMode(mode);
+  };
+
+  const handleZenToggle = () => {
+    setIsZenMode(!isZenMode);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="h-screen flex flex-col bg-background text-foreground overflow-hidden">
+      {/* Clapper Bar */}
+      <ClapperBar 
+        currentMode={currentMode}
+        onModeChange={handleModeChange}
+        isZenMode={isZenMode}
+        onZenToggle={handleZenToggle}
+      />
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left Toolbar */}
+        <LeftToolbar isZenMode={isZenMode} />
+
+        {/* Central Workspace */}
+        <div className="flex-1 flex flex-col">
+          <NodeGraph isZenMode={isZenMode} />
+        </div>
+
+        {/* Right Toolbar */}
+        <RightToolbar isZenMode={isZenMode} />
       </div>
+
+      {/* Timeline */}
+      <Timeline isZenMode={isZenMode} />
     </div>
   );
 };
