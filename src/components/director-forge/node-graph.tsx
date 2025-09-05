@@ -14,241 +14,847 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-// Custom node types
+// MASSIVE COMPLEX PRODUCTION PIPELINE
 const initialNodes: Node[] = [
-  // Character Node
+  // ========== CHARACTER NODES ==========
   {
-    id: 'char-1',
-    position: { x: 50, y: 50 },
+    id: 'char-sarah',
+    position: { x: 50, y: 100 },
     data: { 
-      label: 'Sarah Chen',
+      label: 'Sarah Chen - Detective',
       type: 'character',
       status: 'completed',
-      preview: '/api/placeholder/80/80',
+      preview: '/api/placeholder/100/100',
       character: {
         name: 'Sarah Chen',
         age: '28',
         role: 'Lead Detective',
-        personality: 'Determined, analytical, empathetic'
+        personality: 'Determined, analytical, empathetic',
+        casting: 'Lucy Liu inspired',
+        wardrobe: 'Dark coat, badge, holster'
       }
     },
     style: {
-      background: 'hsl(var(--primary) / 0.1)',
-      border: '2px solid hsl(var(--primary) / 0.4)',
-      borderRadius: '16px',
+      background: 'hsl(var(--primary) / 0.15)',
+      border: '3px solid hsl(var(--primary))',
+      borderRadius: '20px',
       color: 'hsl(var(--foreground))',
-      fontSize: '14px',
-      fontWeight: '500',
-      minWidth: '200px',
+      fontSize: '12px',
+      fontWeight: '600',
+      minWidth: '180px',
+      minHeight: '120px',
     },
   },
   
-  // Background Image Node
   {
-    id: 'img-bg-1',
-    position: { x: 50, y: 250 },
+    id: 'char-marcus',
+    position: { x: 50, y: 280 },
+    data: { 
+      label: 'Marcus Webb - Suspect',
+      type: 'character',
+      status: 'completed',
+      preview: '/api/placeholder/100/100',
+      character: {
+        name: 'Marcus Webb',
+        age: '35',
+        role: 'Prime Suspect',
+        personality: 'Nervous, evasive, desperate',
+        casting: 'Oscar Isaac type',
+        wardrobe: 'Rumpled suit, nervous energy'
+      }
+    },
+    style: {
+      background: 'hsl(var(--destructive) / 0.15)',
+      border: '3px solid hsl(var(--destructive))',
+      borderRadius: '20px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '600',
+      minWidth: '180px',
+      minHeight: '120px',
+    },
+  },
+
+  {
+    id: 'char-witness',
+    position: { x: 50, y: 460 },
+    data: { 
+      label: 'Elena Rodriguez - Witness',
+      type: 'character',
+      status: 'processing',
+      progress: 60,
+      character: {
+        name: 'Elena Rodriguez',
+        age: '42',
+        role: 'Key Witness',
+        personality: 'Cautious, observant, helpful',
+        casting: 'Salma Hayek inspired',
+        wardrobe: 'Business casual, worried expression'
+      }
+    },
+    style: {
+      background: 'hsl(var(--secondary) / 0.15)',
+      border: '3px solid hsl(var(--secondary))',
+      borderRadius: '20px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '600',
+      minWidth: '180px',
+      minHeight: '120px',
+    },
+  },
+
+  // ========== BACKGROUND IMAGE NODES ==========
+  {
+    id: 'bg-police-station',
+    position: { x: 300, y: 50 },
+    data: { 
+      label: 'Police Station Interior',
+      type: 'image-generation',
+      status: 'completed',
+      preview: '/api/placeholder/150/100',
+      imageType: 'background',
+      prompt: 'Modern police station interior, fluorescent lighting, desks, evidence boards, realistic'
+    },
+    style: {
+      background: 'hsl(var(--accent) / 0.12)',
+      border: '2px solid hsl(var(--accent))',
+      borderRadius: '16px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '500',
+      minWidth: '160px',
+    },
+  },
+
+  {
+    id: 'bg-city-street',
+    position: { x: 300, y: 180 },
     data: { 
       label: 'City Street - Night',
       type: 'image-generation',
       status: 'completed',
-      preview: '/api/placeholder/120/80',
-      imageType: 'background'
+      preview: '/api/placeholder/150/100',
+      imageType: 'background',
+      prompt: 'Dark city street at night, neon lights, rain reflections, film noir atmosphere'
     },
     style: {
-      background: 'hsl(var(--accent) / 0.1)',
-      border: '2px solid hsl(var(--accent) / 0.4)',
+      background: 'hsl(var(--accent) / 0.12)',
+      border: '2px solid hsl(var(--accent))',
       borderRadius: '16px',
       color: 'hsl(var(--foreground))',
-      fontSize: '14px',
+      fontSize: '12px',
       fontWeight: '500',
-      minWidth: '180px',
+      minWidth: '160px',
     },
   },
 
-  // Prop Image Node
   {
-    id: 'img-prop-1',
-    position: { x: 50, y: 450 },
+    id: 'bg-warehouse',
+    position: { x: 300, y: 310 },
     data: { 
-      label: 'Vintage Car',
+      label: 'Abandoned Warehouse',
+      type: 'image-generation',
+      status: 'completed',
+      preview: '/api/placeholder/150/100',
+      imageType: 'background',
+      prompt: 'Dark abandoned warehouse, dramatic lighting, shadows, industrial decay'
+    },
+    style: {
+      background: 'hsl(var(--accent) / 0.12)',
+      border: '2px solid hsl(var(--accent))',
+      borderRadius: '16px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '500',
+      minWidth: '160px',
+    },
+  },
+
+  {
+    id: 'bg-apartment',
+    position: { x: 300, y: 440 },
+    data: { 
+      label: 'Luxury Apartment',
+      type: 'image-generation',
+      status: 'processing',
+      progress: 45,
+      imageType: 'background',
+      prompt: 'Modern luxury apartment, floor-to-ceiling windows, city view, elegant interior'
+    },
+    style: {
+      background: 'hsl(var(--accent) / 0.12)',
+      border: '2px solid hsl(var(--accent))',
+      borderRadius: '16px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '500',
+      minWidth: '160px',
+    },
+  },
+
+  {
+    id: 'bg-courtroom',
+    position: { x: 300, y: 570 },
+    data: { 
+      label: 'Courtroom',
+      type: 'image-generation',
+      status: 'idle',
+      imageType: 'background',
+      prompt: 'Traditional courtroom, judge bench, jury box, dramatic lighting, justice theme'
+    },
+    style: {
+      background: 'hsl(var(--accent) / 0.12)',
+      border: '2px solid hsl(var(--accent))',
+      borderRadius: '16px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '500',
+      minWidth: '160px',
+    },
+  },
+
+  // ========== PROP IMAGE NODES ==========
+  {
+    id: 'prop-evidence',
+    position: { x: 550, y: 80 },
+    data: { 
+      label: 'Evidence Files',
+      type: 'image-generation',
+      status: 'completed',
+      preview: '/api/placeholder/120/80',
+      imageType: 'prop',
+      prompt: 'Police evidence files, photos, documents scattered on desk'
+    },
+    style: {
+      background: 'hsl(var(--muted) / 0.3)',
+      border: '2px solid hsl(var(--muted-foreground))',
+      borderRadius: '12px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '11px',
+      fontWeight: '500',
+      minWidth: '140px',
+    },
+  },
+
+  {
+    id: 'prop-gun',
+    position: { x: 550, y: 180 },
+    data: { 
+      label: 'Service Weapon',
+      type: 'image-generation',
+      status: 'completed',
+      preview: '/api/placeholder/120/80',
+      imageType: 'prop',
+      prompt: 'Police service pistol in holster, realistic detail'
+    },
+    style: {
+      background: 'hsl(var(--muted) / 0.3)',
+      border: '2px solid hsl(var(--muted-foreground))',
+      borderRadius: '12px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '11px',
+      fontWeight: '500',
+      minWidth: '140px',
+    },
+  },
+
+  {
+    id: 'prop-car',
+    position: { x: 550, y: 280 },
+    data: { 
+      label: 'Police Cruiser',
       type: 'image-generation',
       status: 'processing',
       progress: 75,
-      imageType: 'prop'
+      imageType: 'prop',
+      prompt: 'Modern police car, emergency lights, realistic details'
     },
     style: {
-      background: 'hsl(var(--secondary) / 0.1)',
-      border: '2px solid hsl(var(--secondary) / 0.4)',
-      borderRadius: '16px',
+      background: 'hsl(var(--muted) / 0.3)',
+      border: '2px solid hsl(var(--muted-foreground))',
+      borderRadius: '12px',
       color: 'hsl(var(--foreground))',
-      fontSize: '14px',
+      fontSize: '11px',
       fontWeight: '500',
-      minWidth: '180px',
+      minWidth: '140px',
     },
   },
 
-  // Scene Composition Node
   {
-    id: 'img-scene-1',
-    position: { x: 400, y: 250 },
+    id: 'prop-phone',
+    position: { x: 550, y: 380 },
     data: { 
-      label: 'Detective Scene',
+      label: 'Crime Scene Photos',
       type: 'image-generation',
-      status: 'idle',
-      imageType: 'scene-composition'
+      status: 'completed',
+      preview: '/api/placeholder/120/80',
+      imageType: 'prop',
+      prompt: 'Crime scene photographs spread on table, evidence markers'
     },
     style: {
-      background: 'hsl(var(--primary) / 0.15)',
-      border: '2px solid hsl(var(--primary) / 0.5)',
-      borderRadius: '16px',
+      background: 'hsl(var(--muted) / 0.3)',
+      border: '2px solid hsl(var(--muted-foreground))',
+      borderRadius: '12px',
       color: 'hsl(var(--foreground))',
-      fontSize: '14px',
+      fontSize: '11px',
       fontWeight: '500',
-      minWidth: '200px',
+      minWidth: '140px',
     },
   },
 
-  // Video Generation Node
+  // ========== SCENE COMPOSITION NODES ==========
   {
-    id: 'video-1',
-    position: { x: 750, y: 250 },
+    id: 'scene-interrogation',
+    position: { x: 800, y: 120 },
     data: { 
-      label: 'Scene Animation',
-      type: 'video-generation',
-      status: 'idle'
+      label: 'Interrogation Scene',
+      type: 'image-generation',
+      status: 'completed',
+      preview: '/api/placeholder/200/150',
+      imageType: 'scene-composition',
+      prompt: 'Detective interrogating suspect in police station room'
     },
     style: {
-      background: 'hsl(var(--accent) / 0.15)',
-      border: '2px solid hsl(var(--accent) / 0.5)',
-      borderRadius: '16px',
-      color: 'hsl(var(--foreground))',
-      fontSize: '14px',
-      fontWeight: '500',
-      minWidth: '200px',
-    },
-  },
-
-  // Audio Node
-  {
-    id: 'audio-1',
-    position: { x: 750, y: 450 },
-    data: { 
-      label: 'Dialogue & Score',
-      type: 'audio-generation',
-      status: 'idle'
-    },
-    style: {
-      background: 'hsl(var(--secondary) / 0.15)',
-      border: '2px solid hsl(var(--secondary) / 0.5)',
-      borderRadius: '16px',
-      color: 'hsl(var(--foreground))',
-      fontSize: '14px',
-      fontWeight: '500',
-      minWidth: '200px',
-    },
-  },
-
-  // Final Cut Node
-  {
-    id: 'final-cut-1',
-    position: { x: 1100, y: 350 },
-    data: { 
-      label: 'Final Cut',
-      type: 'final-export',
-      status: 'idle'
-    },
-    style: {
-      background: 'linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.2))',
+      background: 'linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.15))',
       border: '3px solid hsl(var(--primary))',
       borderRadius: '20px',
       color: 'hsl(var(--foreground))',
-      fontSize: '16px',
+      fontSize: '14px',
       fontWeight: '600',
       minWidth: '220px',
-      boxShadow: '0 0 30px hsl(var(--primary) / 0.4)',
+      minHeight: '140px',
+      boxShadow: '0 8px 25px hsl(var(--primary) / 0.3)',
     },
   },
 
-  // Film Roll Timeline Node
   {
-    id: 'timeline-1',
-    position: { x: 1400, y: 350 },
+    id: 'scene-chase',
+    position: { x: 800, y: 300 },
     data: { 
-      label: 'Timeline',
-      type: 'timeline',
-      status: 'ready'
+      label: 'Street Chase Scene',
+      type: 'image-generation',
+      status: 'processing',
+      progress: 60,
+      imageType: 'scene-composition',
+      prompt: 'Detective chasing suspect through dark city streets'
     },
     style: {
-      background: 'linear-gradient(90deg, hsl(var(--muted)) 0%, hsl(var(--accent) / 0.3) 50%, hsl(var(--muted)) 100%)',
-      border: '2px solid hsl(var(--accent))',
-      borderRadius: '50px',
+      background: 'linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.15))',
+      border: '3px solid hsl(var(--primary))',
+      borderRadius: '20px',
       color: 'hsl(var(--foreground))',
       fontSize: '14px',
-      fontWeight: '500',
-      width: '300px',
-      height: '80px',
+      fontWeight: '600',
+      minWidth: '220px',
+      minHeight: '140px',
+      boxShadow: '0 8px 25px hsl(var(--primary) / 0.3)',
+    },
+  },
+
+  {
+    id: 'scene-confrontation',
+    position: { x: 800, y: 480 },
+    data: { 
+      label: 'Warehouse Confrontation',
+      type: 'image-generation',
+      status: 'idle',
+      imageType: 'scene-composition',
+      prompt: 'Final confrontation in abandoned warehouse, dramatic lighting'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.15))',
+      border: '3px solid hsl(var(--primary))',
+      borderRadius: '20px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '14px',
+      fontWeight: '600',
+      minWidth: '220px',
+      minHeight: '140px',
+      boxShadow: '0 8px 25px hsl(var(--primary) / 0.3)',
+    },
+  },
+
+  {
+    id: 'scene-resolution',
+    position: { x: 800, y: 660 },
+    data: { 
+      label: 'Court Resolution',
+      type: 'image-generation',
+      status: 'idle',
+      imageType: 'scene-composition',
+      prompt: 'Courtroom scene with judge delivering verdict'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.15))',
+      border: '3px solid hsl(var(--primary))',
+      borderRadius: '20px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '14px',
+      fontWeight: '600',
+      minWidth: '220px',
+      minHeight: '140px',
+      boxShadow: '0 8px 25px hsl(var(--primary) / 0.3)',
+    },
+  },
+
+  // ========== VIDEO GENERATION NODES ==========
+  {
+    id: 'video-interrogation',
+    position: { x: 1100, y: 120 },
+    data: { 
+      label: 'Interrogation Video',
+      type: 'video-generation',
+      status: 'completed',
+      preview: '/api/placeholder/180/120',
+      duration: '45s',
+      model: 'RunwayML Gen-3'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--accent) / 0.2), hsl(var(--primary) / 0.1))',
+      border: '3px solid hsl(var(--accent))',
+      borderRadius: '18px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '13px',
+      fontWeight: '600',
+      minWidth: '200px',
+      minHeight: '120px',
+      boxShadow: '0 6px 20px hsl(var(--accent) / 0.3)',
+    },
+  },
+
+  {
+    id: 'video-chase',
+    position: { x: 1100, y: 300 },
+    data: { 
+      label: 'Chase Sequence',
+      type: 'video-generation',
+      status: 'processing',
+      progress: 30,
+      duration: '2m 15s',
+      model: 'Pika Labs 1.5'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--accent) / 0.2), hsl(var(--primary) / 0.1))',
+      border: '3px solid hsl(var(--accent))',
+      borderRadius: '18px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '13px',
+      fontWeight: '600',
+      minWidth: '200px',
+      minHeight: '120px',
+      boxShadow: '0 6px 20px hsl(var(--accent) / 0.3)',
+    },
+  },
+
+  {
+    id: 'video-confrontation',
+    position: { x: 1100, y: 480 },
+    data: { 
+      label: 'Final Confrontation',
+      type: 'video-generation',
+      status: 'idle',
+      duration: '3m 30s',
+      model: 'Gemini Veo-3'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--accent) / 0.2), hsl(var(--primary) / 0.1))',
+      border: '3px solid hsl(var(--accent))',
+      borderRadius: '18px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '13px',
+      fontWeight: '600',
+      minWidth: '200px',
+      minHeight: '120px',
+      boxShadow: '0 6px 20px hsl(var(--accent) / 0.3)',
+    },
+  },
+
+  {
+    id: 'video-resolution',
+    position: { x: 1100, y: 660 },
+    data: { 
+      label: 'Resolution Scene',
+      type: 'video-generation',
+      status: 'idle',
+      duration: '1m 45s',
+      model: 'Luma Dream Machine'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--accent) / 0.2), hsl(var(--primary) / 0.1))',
+      border: '3px solid hsl(var(--accent))',
+      borderRadius: '18px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '13px',
+      fontWeight: '600',
+      minWidth: '200px',
+      minHeight: '120px',
+      boxShadow: '0 6px 20px hsl(var(--accent) / 0.3)',
+    },
+  },
+
+  // ========== AUDIO GENERATION NODES ==========
+  {
+    id: 'audio-dialogue',
+    position: { x: 1400, y: 180 },
+    data: { 
+      label: 'Character Dialogue',
+      type: 'audio-generation',
+      status: 'completed',
+      preview: 'Voice cloning: Sarah, Marcus, Elena',
+      model: 'ElevenLabs + MusicGen'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--secondary) / 0.2), hsl(var(--muted) / 0.3))',
+      border: '3px solid hsl(var(--secondary))',
+      borderRadius: '16px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '600',
+      minWidth: '180px',
+      minHeight: '100px',
+      boxShadow: '0 5px 15px hsl(var(--secondary) / 0.25)',
+    },
+  },
+
+  {
+    id: 'audio-score',
+    position: { x: 1400, y: 320 },
+    data: { 
+      label: 'Cinematic Score',
+      type: 'audio-generation',
+      status: 'processing',
+      progress: 70,
+      preview: 'Tension, action, resolution themes',
+      model: 'Suno AI + Udio'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--secondary) / 0.2), hsl(var(--muted) / 0.3))',
+      border: '3px solid hsl(var(--secondary))',
+      borderRadius: '16px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '600',
+      minWidth: '180px',
+      minHeight: '100px',
+      boxShadow: '0 5px 15px hsl(var(--secondary) / 0.25)',
+    },
+  },
+
+  {
+    id: 'audio-sfx',
+    position: { x: 1400, y: 460 },
+    data: { 
+      label: 'Sound Effects',
+      type: 'audio-generation',
+      status: 'idle',
+      preview: 'Footsteps, sirens, ambient city',
+      model: 'AudioCraft + Custom'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--secondary) / 0.2), hsl(var(--muted) / 0.3))',
+      border: '3px solid hsl(var(--secondary))',
+      borderRadius: '16px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '12px',
+      fontWeight: '600',
+      minWidth: '180px',
+      minHeight: '100px',
+      boxShadow: '0 5px 15px hsl(var(--secondary) / 0.25)',
+    },
+  },
+
+  // ========== FINAL CUT NODES ==========
+  {
+    id: 'final-cut-episode',
+    position: { x: 1700, y: 350 },
+    data: { 
+      label: 'Episode 1: The Investigation',
+      type: 'final-export',
+      status: 'processing',
+      progress: 85,
+      duration: '7m 45s',
+      resolution: '4K HDR'
+    },
+    style: {
+      background: 'linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.25), hsl(var(--secondary) / 0.2))',
+      border: '4px solid hsl(var(--primary))',
+      borderRadius: '24px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '16px',
+      fontWeight: '700',
+      minWidth: '280px',
+      minHeight: '160px',
+      boxShadow: '0 12px 40px hsl(var(--primary) / 0.4), inset 0 2px 8px hsl(var(--background) / 0.1)',
+    },
+  },
+
+  // ========== FILM ROLL TIMELINE ==========
+  {
+    id: 'timeline-filmroll',
+    position: { x: 2100, y: 250 },
+    data: { 
+      label: '🎬 DETECTIVE SERIES - SEASON 1 🎬',
+      type: 'timeline',
+      status: 'active',
+      episodes: 4,
+      totalDuration: '32m 15s'
+    },
+    style: {
+      background: `
+        repeating-linear-gradient(
+          90deg,
+          hsl(var(--card)) 0px,
+          hsl(var(--card)) 20px,
+          hsl(var(--accent) / 0.3) 20px,
+          hsl(var(--accent) / 0.3) 22px,
+          hsl(var(--card)) 22px,
+          hsl(var(--card)) 42px,
+          hsl(var(--primary) / 0.2) 42px,
+          hsl(var(--primary) / 0.2) 44px
+        )
+      `,
+      border: '3px solid hsl(var(--primary))',
+      borderRadius: '60px',
+      color: 'hsl(var(--foreground))',
+      fontSize: '14px',
+      fontWeight: '700',
+      width: '500px',
+      height: '120px',
+      boxShadow: `
+        0 0 0 2px hsl(var(--accent) / 0.3),
+        0 0 30px hsl(var(--primary) / 0.5),
+        inset 0 4px 12px hsl(var(--background) / 0.2)
+      `,
+      position: 'relative',
+      overflow: 'hidden',
     },
   },
 ];
 
 const initialEdges: Edge[] = [
-  // Character to Scene Composition
+  // ========== CHARACTER TO SCENE CONNECTIONS ==========
+  // Sarah Chen to Interrogation Scene
   {
-    id: 'char-to-scene',
-    source: 'char-1',
-    target: 'img-scene-1',
+    id: 'sarah-to-interrogation',
+    source: 'char-sarah',
+    target: 'scene-interrogation',
     animated: true,
     style: { stroke: 'hsl(var(--primary))', strokeWidth: 3 },
   },
   
-  // Background to Scene Composition
+  // Marcus Webb to Interrogation Scene
   {
-    id: 'bg-to-scene',
-    source: 'img-bg-1',
-    target: 'img-scene-1',
+    id: 'marcus-to-interrogation',
+    source: 'char-marcus',
+    target: 'scene-interrogation',
+    animated: true,
+    style: { stroke: 'hsl(var(--destructive))', strokeWidth: 3 },
+  },
+  
+  // Sarah Chen to Chase Scene
+  {
+    id: 'sarah-to-chase',
+    source: 'char-sarah',
+    target: 'scene-chase',
+    animated: true,
+    style: { stroke: 'hsl(var(--primary))', strokeWidth: 3 },
+  },
+  
+  // Marcus Webb to Chase Scene
+  {
+    id: 'marcus-to-chase',
+    source: 'char-marcus',
+    target: 'scene-chase',
+    animated: true,
+    style: { stroke: 'hsl(var(--destructive))', strokeWidth: 3 },
+  },
+  
+  // Characters to Confrontation
+  {
+    id: 'chars-to-confrontation',
+    source: 'char-sarah',
+    target: 'scene-confrontation',
+    animated: true,
+    style: { stroke: 'hsl(var(--primary))', strokeWidth: 3 },
+  },
+  
+  // Elena to Resolution
+  {
+    id: 'elena-to-resolution',
+    source: 'char-witness',
+    target: 'scene-resolution',
+    animated: true,
+    style: { stroke: 'hsl(var(--secondary))', strokeWidth: 3 },
+  },
+
+  // ========== BACKGROUND TO SCENE CONNECTIONS ==========
+  // Police Station to Interrogation
+  {
+    id: 'station-to-interrogation',
+    source: 'bg-police-station',
+    target: 'scene-interrogation',
     style: { stroke: 'hsl(var(--accent))', strokeWidth: 2 },
   },
   
-  // Prop to Scene Composition
+  // City Street to Chase
   {
-    id: 'prop-to-scene',
-    source: 'img-prop-1',
-    target: 'img-scene-1',
-    style: { stroke: 'hsl(var(--secondary))', strokeWidth: 2 },
+    id: 'street-to-chase',
+    source: 'bg-city-street',
+    target: 'scene-chase',
+    style: { stroke: 'hsl(var(--accent))', strokeWidth: 2 },
   },
   
-  // Scene to Video
+  // Warehouse to Confrontation
   {
-    id: 'scene-to-video',
-    source: 'img-scene-1',
-    target: 'video-1',
+    id: 'warehouse-to-confrontation',
+    source: 'bg-warehouse',
+    target: 'scene-confrontation',
+    style: { stroke: 'hsl(var(--accent))', strokeWidth: 2 },
+  },
+  
+  // Courtroom to Resolution
+  {
+    id: 'courtroom-to-resolution',
+    source: 'bg-courtroom',
+    target: 'scene-resolution',
+    style: { stroke: 'hsl(var(--accent))', strokeWidth: 2 },
+  },
+
+  // ========== PROP TO SCENE CONNECTIONS ==========
+  // Evidence to Interrogation
+  {
+    id: 'evidence-to-interrogation',
+    source: 'prop-evidence',
+    target: 'scene-interrogation',
+    style: { stroke: 'hsl(var(--muted-foreground))', strokeWidth: 2 },
+  },
+  
+  // Gun to Chase
+  {
+    id: 'gun-to-chase',
+    source: 'prop-gun',
+    target: 'scene-chase',
+    style: { stroke: 'hsl(var(--muted-foreground))', strokeWidth: 2 },
+  },
+  
+  // Car to Chase
+  {
+    id: 'car-to-chase',
+    source: 'prop-car',
+    target: 'scene-chase',
+    style: { stroke: 'hsl(var(--muted-foreground))', strokeWidth: 2 },
+  },
+  
+  // Crime Photos to Interrogation
+  {
+    id: 'photos-to-interrogation',
+    source: 'prop-phone',
+    target: 'scene-interrogation',
+    style: { stroke: 'hsl(var(--muted-foreground))', strokeWidth: 2 },
+  },
+
+  // ========== SCENE TO VIDEO CONNECTIONS ==========
+  // Interrogation Scene to Video
+  {
+    id: 'interrogation-to-video',
+    source: 'scene-interrogation',
+    target: 'video-interrogation',
     animated: true,
-    style: { stroke: 'hsl(var(--primary))', strokeWidth: 3 },
+    style: { stroke: 'hsl(var(--primary))', strokeWidth: 4 },
   },
   
-  // Video to Final Cut
+  // Chase Scene to Video
   {
-    id: 'video-to-final',
-    source: 'video-1',
-    target: 'final-cut-1',
+    id: 'chase-to-video',
+    source: 'scene-chase',
+    target: 'video-chase',
+    animated: true,
+    style: { stroke: 'hsl(var(--primary))', strokeWidth: 4 },
+  },
+  
+  // Confrontation Scene to Video
+  {
+    id: 'confrontation-to-video',
+    source: 'scene-confrontation',
+    target: 'video-confrontation',
+    animated: true,
+    style: { stroke: 'hsl(var(--primary))', strokeWidth: 4 },
+  },
+  
+  // Resolution Scene to Video
+  {
+    id: 'resolution-to-video',
+    source: 'scene-resolution',
+    target: 'video-resolution',
+    animated: true,
+    style: { stroke: 'hsl(var(--primary))', strokeWidth: 4 },
+  },
+
+  // ========== VIDEO TO FINAL CUT CONNECTIONS ==========
+  // All Videos to Final Cut
+  {
+    id: 'interrogation-video-to-final',
+    source: 'video-interrogation',
+    target: 'final-cut-episode',
     style: { stroke: 'hsl(var(--accent))', strokeWidth: 3 },
   },
   
-  // Audio to Final Cut
   {
-    id: 'audio-to-final',
-    source: 'audio-1',
-    target: 'final-cut-1',
+    id: 'chase-video-to-final',
+    source: 'video-chase',
+    target: 'final-cut-episode',
+    style: { stroke: 'hsl(var(--accent))', strokeWidth: 3 },
+  },
+  
+  {
+    id: 'confrontation-video-to-final',
+    source: 'video-confrontation',
+    target: 'final-cut-episode',
+    style: { stroke: 'hsl(var(--accent))', strokeWidth: 3 },
+  },
+  
+  {
+    id: 'resolution-video-to-final',
+    source: 'video-resolution',
+    target: 'final-cut-episode',
+    style: { stroke: 'hsl(var(--accent))', strokeWidth: 3 },
+  },
+
+  // ========== AUDIO TO FINAL CUT CONNECTIONS ==========
+  // All Audio to Final Cut
+  {
+    id: 'dialogue-to-final',
+    source: 'audio-dialogue',
+    target: 'final-cut-episode',
     style: { stroke: 'hsl(var(--secondary))', strokeWidth: 3 },
   },
   
-  // Final Cut to Timeline (Film Roll)
   {
-    id: 'final-to-timeline',
-    source: 'final-cut-1',
-    target: 'timeline-1',
+    id: 'score-to-final',
+    source: 'audio-score',
+    target: 'final-cut-episode',
+    style: { stroke: 'hsl(var(--secondary))', strokeWidth: 3 },
+  },
+  
+  {
+    id: 'sfx-to-final',
+    source: 'audio-sfx',
+    target: 'final-cut-episode',
+    style: { stroke: 'hsl(var(--secondary))', strokeWidth: 3 },
+  },
+
+  // ========== FINAL CUT TO FILM ROLL TIMELINE ==========
+  {
+    id: 'final-to-filmroll',
+    source: 'final-cut-episode',
+    target: 'timeline-filmroll',
     animated: true,
-    style: { stroke: 'hsl(var(--primary))', strokeWidth: 4 },
+    style: { 
+      stroke: 'hsl(var(--primary))', 
+      strokeWidth: 6,
+      strokeDasharray: '10 5',
+    },
   },
 ];
 
