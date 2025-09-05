@@ -880,10 +880,19 @@ export function NodeGraph({ isZenMode }: NodeGraphProps) {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         fitView
+        fitViewOptions={{
+          padding: 0.1,
+          includeHiddenNodes: false,
+          minZoom: 0.1,
+          maxZoom: 1.5,
+        }}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.3 }}
+        minZoom={0.05}
+        maxZoom={2}
         style={{ 
           background: 'hsl(var(--background))',
         }}
-        className="director-flow"
+        className="director-flow w-full h-full"
       >
         <Controls 
           className="react-flow__controls"
