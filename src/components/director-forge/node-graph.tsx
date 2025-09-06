@@ -14,17 +14,40 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
+// Import preview images
+import characterSarahPreview from '@/assets/previews/character-sarah.jpg';
+import characterNeoPreview from '@/assets/previews/character-neo.jpg';
+import locationCityPreview from '@/assets/previews/location-city.jpg';
+import locationWarehousePreview from '@/assets/previews/location-warehouse.jpg';
+
+// Import components
+import { NodeInspector } from './node-inspector';
+import { TimelineNode } from './timeline-node';
+import { CharacterNode } from './nodes/character-node';
+import { ImageGenerationNode } from './nodes/image-generation-node';
+import { VideoGenerationNode } from './nodes/video-generation-node';
+import { AudioGenerationNode } from './nodes/audio-generation-node';
+
+const nodeTypes = {
+  character: CharacterNode,
+  imageGeneration: ImageGenerationNode,
+  videoGeneration: VideoGenerationNode,
+  audioGeneration: AudioGenerationNode,
+  timeline: TimelineNode,
+};
+
 // MASSIVE COMPLEX PRODUCTION PIPELINE
 const initialNodes: Node[] = [
   // ========== CHARACTER NODES ==========
   {
     id: 'char-sarah',
+    type: 'character',
     position: { x: 50, y: 100 },
     data: { 
       label: 'Sarah Chen - Detective',
       type: 'character',
       status: 'completed',
-      preview: '/api/placeholder/100/100',
+      preview: characterSarahPreview,
       character: {
         name: 'Sarah Chen',
         age: '28',
@@ -865,11 +888,18 @@ interface NodeGraphProps {
 export function NodeGraph({ isZenMode }: NodeGraphProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [inspectorOpen, setInspectorOpen] = useState(false);
+  const [selectedNode, setSelectedNode] = useState<any>(null);
 
   const onConnect = useCallback(
     (params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
+
+  const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
+    setSelectedNode(node);
+    setInspectorOpen(true);
+  }, []);
 
   return (
     <div className="flex-1 bg-background relative">
@@ -879,6 +909,8 @@ export function NodeGraph({ isZenMode }: NodeGraphProps) {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onNodeClick={onNodeClick}
+        nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{
           padding: 0.1,
@@ -988,6 +1020,13 @@ export function NodeGraph({ isZenMode }: NodeGraphProps) {
           </div>
         </div>
       </div>
+
+      <NodeInspector
+        isOpen={inspectorOpen}
+        onClose={() => setInspectorOpen(false)}
+        nodeData={selectedNode?.data}
+        nodeType={selectedNode?.type || 'default'}
+      />
     </div>
   );
 }

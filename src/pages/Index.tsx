@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ClapperBar } from "@/components/director-forge/clapper-bar";
 import { LeftToolbar } from "@/components/director-forge/left-toolbar";
 import { RightToolbar } from "@/components/director-forge/right-toolbar";
-import { NodeGraph } from "@/components/director-forge/node-graph";
+import { NodeGraphEnhanced } from "@/components/director-forge/node-graph-enhanced";
 import { Timeline } from "@/components/director-forge/timeline";
 
 const Index = () => {
@@ -34,7 +34,7 @@ const Index = () => {
 
         {/* Central Workspace */}
         <div className="flex-1 flex flex-col">
-          <NodeGraph isZenMode={isZenMode} />
+          <NodeGraphEnhanced isZenMode={isZenMode} />
         </div>
 
         {/* Right Toolbar */}
