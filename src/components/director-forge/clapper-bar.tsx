@@ -51,7 +51,7 @@ export function ClapperBar({ onModeChange, currentMode, isZenMode, onZenToggle }
             <Icon className="w-4 h-4" />
             {label}
             {currentMode === id && (
-              <div className="absolute inset-0 bg-primary/10 rounded-lg animate-pulse-glow" />
+              <div className="absolute inset-0 bg-primary/10 rounded-lg" />
             )}
           </Button>
         ))}

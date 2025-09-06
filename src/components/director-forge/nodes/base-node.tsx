@@ -75,13 +75,18 @@ export const BaseNode = memo(({
   return (
     <div 
       className={`
-        min-w-48 bg-node-bg rounded-xl border-2 transition-all duration-300
+        min-w-48 rounded-xl border-2 transition-all duration-300
         ${getStatusColor()}
         ${data.status === 'processing' ? 'animate-pulse-glow' : ''}
-        hover:scale-105 group
+        hover:scale-105 group backdrop-blur-xl
       `}
       style={{
-        boxShadow: data.status !== 'idle' ? `0 0 20px ${color}30` : undefined
+        background: 'rgba(34, 37, 42, 0.8)',
+        backdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        boxShadow: data.status !== 'idle' 
+          ? `0 0 30px ${color}40, inset 0 1px 0 rgba(255, 255, 255, 0.1)` 
+          : 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.3)'
       }}
     >
       {/* Input Handles */}
@@ -101,7 +106,13 @@ export const BaseNode = memo(({
       ))}
 
       {/* Node Header */}
-      <div className="p-4 border-b border-node-border">
+      <div 
+        className="p-4 border-b"
+        style={{
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'rgba(255, 255, 255, 0.02)'
+        }}
+      >
         <div className="flex items-center gap-3">
           <div 
             className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -163,14 +174,25 @@ export const BaseNode = memo(({
       {/* Preview */}
       {data.preview && (
         <div className="p-4">
-          <div className="w-full h-20 bg-muted rounded-lg flex items-center justify-center overflow-hidden">
-            {data.type === 'image' ? (
+          <div 
+            className="w-full h-20 rounded-lg flex items-center justify-center overflow-hidden border"
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
+            {(typeof data.preview === 'string' && (data.preview.includes('.jpg') || data.preview.includes('.png') || data.preview.includes('.webp'))) ? (
               <img 
                 src={data.preview} 
                 alt="Preview" 
                 className="w-full h-full object-cover rounded"
+                onError={(e) => {
+                  console.log('Image failed to load:', data.preview);
+                  e.currentTarget.style.display = 'none';
+                }}
               />
-            ) : data.type === 'video' ? (
+            ) : data.type === 'video' && typeof data.preview === 'string' ? (
               <video 
                 src={data.preview} 
                 className="w-full h-full object-cover rounded"
@@ -179,8 +201,8 @@ export const BaseNode = memo(({
                 autoPlay
               />
             ) : (
-              <div className="text-xs text-muted-foreground text-center">
-                {data.preview}
+              <div className="text-xs text-muted-foreground text-center p-2">
+                {typeof data.preview === 'string' ? data.preview : 'Preview'}
               </div>
             )}
           </div>
