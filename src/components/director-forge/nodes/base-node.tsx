@@ -215,7 +215,7 @@ export const BaseNode = memo(({
           <Button
             variant="ai"
             size="sm"
-            className="flex-1"
+            className="flex-1 transition-transform duration-200 hover:scale-105"
             onClick={() => onExecute(data.id)}
             disabled={data.status === 'processing'}
           >

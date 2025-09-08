@@ -74,7 +74,7 @@ export function ClapperBar({ onModeChange, currentMode, isZenMode, onZenToggle }
           Save
         </Button>
         
-        <Button variant="ai" size="toolbar">
+        <Button variant="ai" size="toolbar" className="transition-transform duration-200 hover:scale-105">
           <Download className="w-4 h-4" />
           Export
         </Button>
