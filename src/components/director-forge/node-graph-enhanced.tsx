@@ -260,13 +260,13 @@ export function NodeGraphEnhanced({ isZenMode }: NodeGraphProps) {
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{
-          padding: 0.1,
+          padding: 0.2,
           includeHiddenNodes: false,
           minZoom: 0.1,
           maxZoom: 1.5,
         }}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.5 }}
-        minZoom={0.1}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.4 }}
+        minZoom={0.05}
         maxZoom={2}
         style={{ 
           background: 'radial-gradient(circle at 50% 50%, hsl(220 15% 12%) 0%, hsl(220 15% 8%) 100%)',
